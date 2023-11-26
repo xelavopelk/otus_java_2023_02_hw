@@ -13,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "client")
 public class Client implements Cloneable {
@@ -37,12 +36,25 @@ public class Client implements Cloneable {
         this.id = id;
         this.name = name;
     }
+
+    public Client(Long id, String name, Address address, List<Phone> phones) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phones = phones;
+        if (this.phones != null) {
+            for (var p : this.phones) {
+                p.setClient(this);
+            }
+        }
+    }
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="client", orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Phone> phones;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.LAZY)
+    private List<Phone> phones = null;
 
     @Override
     public Client clone() {

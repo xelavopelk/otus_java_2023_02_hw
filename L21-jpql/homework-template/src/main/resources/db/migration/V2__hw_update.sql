@@ -7,7 +7,6 @@ create table address
 
 create table phone
 (
-    id    bigint not null primary key GENERATED ALWAYS AS IDENTITY,
     client_id   bigint not null,
-    number varchar(50) not null
+    number varchar(50) not null primary key
 );

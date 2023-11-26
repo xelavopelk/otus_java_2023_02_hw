@@ -9,18 +9,13 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name = "phone")
 @Data
-//@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class Phone {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="client_id")
-    private final Client client;
-    @Column(name = "number", nullable=false)
-    private final String number;
+    @JoinColumn(name = "client_id")
+    private Client client;
+    @Id
+    @Column(name = "number", nullable = false)
+    private String number;
 }

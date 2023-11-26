@@ -36,10 +36,9 @@ public class DbServiceDemo {
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
 ///
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
-        //dbServiceClient.saveClient(new Client("dbServiceFirst"));
-        dbServiceClient.saveClient(new Client(null,"Vasya", new Address(null, "AnyStreet"),
-                List.of(new Phone(null, "13-555-22"), new Phone(null, "14-666-333"))));
-        /*var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));
+
+        dbServiceClient.saveClient(new Client("dbServiceFirst"));
+        var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));
         var clientSecondSelected = dbServiceClient.getClient(clientSecond.getId())
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
         log.info("clientSecondSelected:{}", clientSecondSelected);
@@ -52,6 +51,5 @@ public class DbServiceDemo {
         log.info("All clients");
         dbServiceClient.findAll().forEach(client -> log.info("client:{}", client));
 
-         */
     }
 }
